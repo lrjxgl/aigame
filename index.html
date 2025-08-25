@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>老雷的AI修仙文字游戏</title>
+    <style>
+       
+    </style>
+    <link rel="stylesheet" href="css/dt-ui-h5.css">
+    <link rel="stylesheet" href="css/app.css?vs_1.00122">
+</head>
+<body>
+    <div  id="App">
+        <div class="header-fixtop flex-col">
+            <div>
+                <div class="chat-header">
+                    <i class="fas fa-comments"></i>
+                    <span>老雷的AI修仙文字游戏</span>
+                </div>
+                
+                <div class="tabs-border">
+                    <div @click="page='index'" :class="page=='index'?'tabs-border-active':''" class="tabs-border-item">主屏</div>
+                    <div @click="page='beibao'" :class="page=='beibao'?'tabs-border-active':''"  class="tabs-border-item">背包</div>
+                    <div @click="page='chongwu'" :class="page=='chongwu'?'tabs-border-active':''"  class="tabs-border-item">宠物</div>
+                    <div @click="page='status'" :class="page=='status'?'tabs-border-active':''"  class="tabs-border-item">状态</div>
+                    <div @click="page='maps'" :class="page=='maps'?'tabs-border-active':''"  class="tabs-border-item">地图</div>
+                    <div @click="page='npcs'" :class="page=='npcs'?'tabs-border-active':''"  class="tabs-border-item">npc</div>
+                   <!-- <div @click="page='rank'" :class="page=='rank'?'tabs-border-active':''"  class="tabs-border-item">英雄榜</div>-->
+                </div> 
+             </div>
+        </div>
+        <div style="height: 96px;"></div>
+        <div class="chat-container">    
+            <page-beibao  v-if="page=='beibao' "  class="page"></page-beibao>
+            <page-status v-if="page=='status' "  class="page"></page-status>
+            <page-index @unlogin="page='login'"  v-if="page!='login'" :class="page!='index'?'none':''"  class="page">xx</page-index>  
+            <page-maps v-if="page=='maps' "  class="page"></page-maps> 
+            <page-npcs v-if="page=='npcs' "  class="page"></page-npcs> 
+            <page-chongwu v-if="page=='chongwu' "  class="page"></page-chongwu> 
+            <page-login @login-success="page='index'" v-if="page=='login'"></page-login>
+            <page-rank v-if="page=='rank'"></page-rank>
+        </div>
+    </div>
+    
+    <script src="js/vue2.js"></script>
+    <script src="js/base.js?vs_1.00122"></script>
+    <script src="js/page-index.js?vs_1.00122"></script>
+    <script src="js/page-beibao.js?vs_1.00122"></script>
+    <script src="js/page-status.js?vs_1.00122"></script>
+    <script src="js/page-maps.js?vs_1.00122"></script> 
+    <script src="js/page-npcs.js?vs_1.00122"></script>
+    <script src="js/page-chongwu.js?vs_1.00122"></script>
+    <script src="js/page-login.js?vs_1.00122"></script>
+    <script src="js/page-rank.js"></script>
+    <script src="js/app.js?vs_1.00122"></script>
+</body>
+</html>
