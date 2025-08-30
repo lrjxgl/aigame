@@ -12,7 +12,7 @@ if(!empty($_REQUEST['userid'])){
 spl_autoload_register(function ($class) {
 	$class=strtolower($class);
     $dirs=[
-        "command","maps","wupin","beibao","fun","npc","level","gamedata","gongfa","chongwu","school","place"
+        "command","maps","wupin","beibao","fun","npc","level","gamedata","gongfa","chongwu","liandan","school","place","skill"
     ];
     foreach($dirs as $dir){
         $f=$dir."/".$class . '.php';
@@ -97,6 +97,7 @@ switch($action){
             $data=player::get();
             $level=level::get($data["level"]);
             $data["level"]=$level["name"];
+            $data["level_percent"]=round($data["level_percent"],2);
             echo json_encode(["data"=>$data]);
         break;
     case "maps":

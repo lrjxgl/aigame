@@ -1,6 +1,6 @@
 <?php
 $apicom_config=[
-    "aliyun"=>[
+    "aliyun"=>[ 
         "apicom"=>"aliyun",
         "ali_api_key"=>"sk-ada96c2 ",
         "alimodel"=>"qwen-max"

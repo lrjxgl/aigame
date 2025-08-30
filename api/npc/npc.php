@@ -5,10 +5,10 @@ class npc{
         'level' => 1, // 当前境界等级 (练气期1层)
         'level_percent' => 0, // 当前等级进度 (0-100)
         'danLevel' => 0, // 炼丹等级 (1-9)
-        'health' => 100, // 生命值 (HP)
-        'max_health' => 100, // 最大生命值
-        'mana' => 50, // 灵力值 (MP/灵力)
-        'max_mana' => 50, // 最大灵力值
+        'hp' => 100, // 生命值 (HP)
+        'max_hp' => 100, // 最大生命值
+        'mp' => 50, // 灵力值 (MP/灵力)
+        'max_mp' => 50, // 最大灵力值
         'energy' => 100, // 精力值 (用于行动、采集等)
         'max_energy' => 100, // 最大精力值
         'stamina' => 80, // 体力值 (用于战斗、奔跑)
@@ -27,6 +27,11 @@ class npc{
         'gold' => 500, // 金币            
         'spirit_stones' => 100, // 灵石
         'prestige' => 0, // 声望
+        'map'=>"新手村",
+        "school"=>"",//宗门
+        "family"=>"",//家族
+            
+        'place' => '青云峰' // 当前位置
     ];
 
     public static function getAll(){

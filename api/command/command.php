@@ -64,6 +64,16 @@ class command{
         foreach(cmds_place::$cmds as $k=>$v){
             $command_list[$k]=$v;
         }
+        require_once __DIR__."/cmds/wupin.php";
+        foreach(cmds_wupin::$cmds as $k=>$v){
+            $command_list[$k]=$v;
+        }
+        require_once __DIR__."/cmds/skill.php";
+        foreach(cmds_skill::$cmds as $k=>$v){
+            $command_list[$k]=$v;
+        }
+
+
         return $command_list;
     }
     
@@ -266,6 +276,8 @@ class command{
                 $level=level::get($playerStatus["level"]);
                 $con.="玩家名字：".$playerStatus["name"]."\n";
                 $con.="等级：".$level["name"]."\n";
+                $con.="生命值：".$playerStatus["hp"]."/".$playerStatus["max_hp"]."\n";
+                $con.="蓝量值：".$playerStatus["mp"]."/".$playerStatus["max_mp"]."\n";
                 $con.="宗门：".$playerStatus["school"]."\n";
                 $con.="家族：".$playerStatus["family"]."\n";  
                 $con.="所在地图：".$playerStatus["map"]."\n";

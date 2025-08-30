@@ -10,7 +10,16 @@ function Ai_config($apicom){
 function AIAsk($prompt,$messages=[],$system=""){
 	$config=Ai_config("aliyun");
 	AiApi\text2text::init($config);
-	if(empty($messages["system"])){
+	$has_system=false;
+	if(!empty($messages)){
+		foreach($messages as $m){
+			if($m["role"]=="system"){
+				$has_system=true;
+				break;
+			}
+		}
+	}
+	if(!$has_system){
 		if(empty($system)){
 			$system=GAME_SYSTEM;
 		}
@@ -29,8 +38,15 @@ function AIAsk($prompt,$messages=[],$system=""){
 function AIRun($prompt,$messages=[],$system=""){
     $config=Ai_config("aliyun");
 	AiApi\text2text::init($config);
- 
-	if(empty($messages["system"])){
+	if(!empty($messages)){
+		foreach($messages as $m){
+			if($m["role"]=="system"){
+				$has_system=true;
+				break;
+			}
+		}
+	}
+	if(!$has_system){
 		if(empty($system)){
 			$system=GAME_SYSTEM;
 		}
@@ -58,7 +74,7 @@ function AIRun($prompt,$messages=[],$system=""){
 	$content=""; 
 	$callback=function($ch, $data) use($wsclient,$wsclient_to,$wstaskid,&$content)   {
 	  
-	   
+	 
 	  $lines=explode("\n",$data);
 	  foreach($lines as $line){
 		$ex=explode(":",$line);

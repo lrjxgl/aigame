@@ -13,7 +13,7 @@ if(!empty($_REQUEST['userid'])){
 spl_autoload_register(function ($class) {
 	$class=strtolower($class);
     $dirs=[
-        "command","maps","wupin","beibao","fun","npc","level","gamedata","gongfa","chongwu","liandan","school","place"
+        "command","maps","wupin","beibao","fun","npc","level","gamedata","gongfa","chongwu","liandan","school","place","skill"
     ];
     foreach($dirs as $dir){
         $f=$dir."/".$class . '.php';

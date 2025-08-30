@@ -1,6 +1,6 @@
 <?php
 class help{
-
+    
     public static function parseJson($str){
         $a1=json_decode($str,true);
         if(empty($a1)){

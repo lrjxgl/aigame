@@ -4,7 +4,7 @@ class beibao{
     public static function getAll(){
         $file=ROOT_PATH."/data/beibao/".GAME_USERID.".json";
         if(!file_exists($file)){
-            file_put_contents($file,"{}");
+            file_put_contents($file,"[]");
         }
         return json_decode(file_get_contents($file),true);
     }
@@ -27,11 +27,16 @@ class beibao{
         $title=trim($title);
         $items=self::getAll();
         //判断物品是否存在
+        $type="unknown";
+        $good=wupin::getByName($title);
+        if(!empty($good)){
+            $type=$good["type"];
+        }
         $item_id=md5($title);
         if(!array_key_exists($item_id,$items)){
             $items[$item_id]=[
                 "title"=>$title,
-
+                "type"=>$type,
                 "num"=>$num
             ];
         }else{
@@ -88,20 +93,23 @@ class beibao{
             unset($items[$item_id]);
         }
         $good=wupin::getByName($title);
-        $hp=1;
-        $attack=1;
-        $defense=1;
-        $exp=1;
+        $hp=0;
+        $mp=0;
+        $attack=0;
+        $defense=0;
+        $exp=0;
         if(!empty($good)){
             $hp=$good["hp"];
             $attack=$good["attack"];
             $defense=$good["defense"];
             $exp=$good["exp"];
+            $mp=$good["mp"];
 
         }
         
         $player=player::get();
-        $player["health"]+= $hp;
+        $player["hp"]+= $hp;
+        $player["mp"]+= $mp;
         $player["attack"]+= $attack;
         $ulevel=level::get($player["level"]);
         $level_percent=intval($exp*100/$ulevel["experience"]);
@@ -133,6 +141,47 @@ class beibao{
         }
         file_put_contents(ROOT_PATH."/data/beibao/".GAME_USERID.".json",json_encode($items));
     }
+    /**
+     * 根据物品类型获取物品
+     */
+    public static function getByType($type='health'){
+        $list=self::getAll();
+        $arr=[];
+        foreach($list as $item){
+            if($item["type"]==$type){
+               $arr[]=$item;
+            }
+        }
+        return $arr;
+    }
+    /**
+     * 战斗中可使用的物品
+     */
+    public static function getInFight(){
+        $list=self::getAll();
+        //print_r($list);
+        $arr=[];
+        foreach($list as $item){
+            $attr="";
+            switch($item["type"]){
+                case "attack":
+                    $item["attr"]="攻击力:".$item["attack"]." 魔法攻击力：".$item["magic_attack"];
+                    $arr["attr"]=$item;
+                    break;
+                case "defense":
+                    $item["attr"]="防御力:".$item["defense"]." 魔法防御力：".$item["magic_defense"];
+                    $arr["attr"]=$item;
+                    break;
+                case "health":
+                    $item["attr"]="补充生命值：".$item["hp"]." 补充魔法值：".$item["mp"];
+                    $arr["attr"]=$item;
+                    break;
+            }
+           
+            
+        }
+        return $arr;
+    } 
 
 
 }

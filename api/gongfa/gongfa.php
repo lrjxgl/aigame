@@ -2,18 +2,17 @@
 class gongfa{
     public static $attr=[
         "level"=>1,//等级
+        "min_level"=>1,
+        "level_percent"=>0,//进阶百分比"
         "name"=>"功法",
        
         "wuxing"=>"火", //五行属性
          
         "attack"=>100,//攻击力
         "magic_attack"=>100,//魔法攻击力
-        "defence"=>100,//防御力
-        "magic_defence"=>100,//魔法防御力
-        "experience"=>100,//进阶经验
-        "experience_next"=>100,
-        "level_num"=>3,//进阶等级数
-
+        "defense"=>100,//防御力
+        "magic_defense"=>100,//魔法防御力
+    
 
     ];
     public static function getAll(){
@@ -120,10 +119,10 @@ class gongfa{
         $con="";
         if($item["level_percent"]>=100){
             $item["level"]++;           
-            $item["level_percent"]=0;
-            $con="恭喜你，功法升级到".$item["level"]."级！";
+            $item["level_percent"]=100;
+            $con="恭喜你，功法升级到大圆满。";
         }
-        $con.="修炼成功,提升".$per."%,功法等级：".$item["level"].",修炼进度：".$item["level_percent"]."%";
+        $con.="修炼成功,提升".$per."%,功法修炼进度：".$item["level_percent"]."%";
         $list[$id]=$item;
         file_put_contents($file,json_encode($list));
         return $con;

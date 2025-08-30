@@ -12,10 +12,27 @@ var App=new Vue({
         return;
       }
   },
+  watch:{
+    page(){
+      this.$nextTick(()=>{
+        //滚动到底部
+        this.goBottom();
+        
+      })
+    }
+  },
   methods:{
     getPage(){
 
     }, 
+    goBottom(){
+        //body 滚动条 滚动到底部
+        this.$nextTick(()=>{
+            console.log("滚动到底部")
+            document.documentElement.scrollTop = 100000;
+        })
+
+    }
   }  
 
 })

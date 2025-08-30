@@ -17,6 +17,12 @@ class cmds_gongfa{
             "title"=>"删除功法",
             "run"=>"cmds_gongfa::delete"
         ],
+        "修炼功法"=>[
+            "title"=>"修炼功法",
+            "run"=>"cmds_gongfa::xiulian"
+        ],
+        
+        
 
     ];
 
@@ -56,9 +62,14 @@ class cmds_gongfa{
     }
 
     public static function get($prompt){
-        $name=trim(str_replace("删除功法","",$prompt));
-        gongfa::remove($name);
-        return "删除功法{$name}成功";
+        $name=trim(str_replace("查看功法","",$prompt));
+
+        $gongfa=gongfa::get($name);
+        $con=$name."功法属性：\n";
+        foreach($gongfa as $k=>$v){
+            $con.="".consts::get_base_name($k)."：".$v."\n"; 
+        }
+        return $con."\n";
     }
 
     public static function delete($prompt){
@@ -69,6 +80,21 @@ class cmds_gongfa{
         }
         gongfa::delete($res);
         return "删除成功";
+    }
+
+    public static function xiulian($prompt){
+        $name=trim(str_replace("修炼功法","",$prompt));
+        $gongfa=gongfa::get($name);
+        if(empty($gongfa)){
+            $p="请从下面的提示词中提取出要修炼的功法名称,如果没有则返回无：".$prompt;
+            $res=AIRun($p);
+            if($res=='无'){
+                return "没有发现任何需要修炼的功法";
+            }
+            $gongfa=gongfa::get($name);
+        }
+        $res=gongfa::xiulian($gongfa["name"]);
+        return $res;
     }
 
 

@@ -20,6 +20,8 @@ Vue.component('page-status', {
             <div class="flex flex-wrap " >
                  <span class="pd-5 mg-5">玩家名字：{{data.name}}</span>
                 <span class="pd-5 mg-5">修为：{{data.level}} 进度：{{data.level_percent}}%</span>
+                <span class="pd-5 mg-5">生命力：{{data.hp}}/{{data.max_hp}}</span>
+                <span class="pd-5 mg-5">蓝量：{{data.mp}}/{{data.max_mp}}</span>
                 <span class="pd-5 mg-5">地图：{{data.map}}</span>
                 <span class="pd-5 mg-5">地点：{{data.place}}</span>
                 <span class="pd-5 mg-5">物理攻击：{{data.attack}}</span>
